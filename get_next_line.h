@@ -1,0 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jkoupy <jkoupy@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 11:41:30 by jkoupy            #+#    #+#             */
+/*   Updated: 2023/10/04 15:13:46 by jkoupy           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
+
+//read
+# include <unistd.h>
+//malloc, free
+# include <stdlib.h>
+
+typedef struct s_list
+{
+	char			*content;
+	struct s_list	*next;
+}	t_list;
+
+//get_next_line.c
+void	free_line(t_list **llist);
+char	*read_line(t_list *llist);
+int		line_ends(char *line);
+void	save_line(t_list **llist, int fd);
+char	*get_next_line(int fd);
+
+//get_next_line_utils.c
+/* void	pl(t_list *ll) */
+void	free_list(t_list **llist, char *new_content);
+int		line_length(t_list *llist);
+void	ft_lstadd_back(t_list **lst, t_list *new);
+t_list	*ft_lstlast(t_list *lst);
+t_list	*ft_lstnew(void *content);
+
+#endif
