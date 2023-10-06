@@ -6,7 +6,7 @@
 /*   By: jkoupy <jkoupy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 11:41:30 by jkoupy            #+#    #+#             */
-/*   Updated: 2023/10/04 15:13:46 by jkoupy           ###   ########.fr       */
+/*   Updated: 2023/10/06 14:02:00 by jkoupy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*get_next_line(int fd);
 /* void	pl(t_list *ll) */
 void	free_list(t_list **llist, char *new_content);
 int		line_length(t_list *llist);
-void	ft_lstadd_back(t_list **lst, t_list *new);
+void	ft_lstadd_new(t_list **lst, char *new_content);
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstnew(void *content);
 

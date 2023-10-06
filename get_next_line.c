@@ -6,7 +6,7 @@
 /*   By: jkoupy <jkoupy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 11:41:33 by jkoupy            #+#    #+#             */
-/*   Updated: 2023/10/04 14:59:23 by jkoupy           ###   ########.fr       */
+/*   Updated: 2023/10/06 14:01:25 by jkoupy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ int	line_ends(char *line)
 // until it finds a buffer smaller than B_S or a \n in it
 void	save_line(t_list **llist, int fd)
 {
-	t_list	*node;
 	int		readlen;
 	char	*buf;
 
@@ -96,37 +95,25 @@ void	save_line(t_list **llist, int fd)
 	if (!buf)
 		return ;
 	readlen = read(fd, buf, BUFFER_SIZE);
-	if (readlen <= 0)
-	{
-		free(buf);
-		return ;
-	}
+	if (readlen == 0)
+		return (free(buf));
+	if (readlen == -1)
+		return (free(buf), free_list(llist, NULL));
 	buf[readlen] = '\0';
-	node = ft_lstnew(buf);
-	ft_lstadd_back(llist, node);
-	if (!*llist && buf[0])
-		*llist = ft_lstnew(buf);
+	ft_lstadd_new(llist, buf);
 	if (line_ends(buf) || readlen < BUFFER_SIZE)
 		return ;
-	save_line(llist, fd);
-	return ;
+	return (save_line(llist, fd));
 }
 
 char	*get_next_line(int fd)
 {
 	static t_list	*llist;
 	char			*next_line;
-	t_list			*tmp;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &next_line, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
-		while (llist)
-		{
-			free(llist->content);
-			tmp = llist->next;
-			free(llist);
-			llist = tmp;
-		}
+		free_list(&llist, NULL);
 		return (NULL);
 	}
 	save_line(&llist, fd);
