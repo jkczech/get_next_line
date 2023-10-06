@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoupy <jkoupy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 11:41:33 by jkoupy            #+#    #+#             */
-/*   Updated: 2023/10/06 17:30:06 by jkoupy           ###   ########.fr       */
+/*   Updated: 2023/10/06 17:30:18 by jkoupy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	free_line(t_list **llist)
 {
@@ -108,17 +108,17 @@ void	save_line(t_list **llist, int fd)
 
 char	*get_next_line(int fd)
 {
-	static t_list	*llist;
+	static t_list	*llist[1024];
 	char			*next_line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
-		free_list(&llist, NULL);
+		free_list(&llist[fd + 1], NULL);
 		return (NULL);
 	}
-	save_line(&llist, fd);
-	next_line = read_line(llist);
-	free_line(&llist);
+	save_line(&llist[fd + 1], fd);
+	next_line = read_line(llist[fd + 1]);
+	free_line(&llist[fd + 1]);
 	return (next_line);
 }
 
