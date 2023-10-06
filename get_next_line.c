@@ -6,7 +6,7 @@
 /*   By: jkoupy <jkoupy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 11:41:33 by jkoupy            #+#    #+#             */
-/*   Updated: 2023/10/06 14:01:25 by jkoupy           ###   ########.fr       */
+/*   Updated: 2023/10/06 14:33:40 by jkoupy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ void	save_line(t_list **llist, int fd)
 	return (save_line(llist, fd));
 }
 
+#include <stdio.h>
+
 char	*get_next_line(int fd)
 {
 	static t_list	*llist;
@@ -121,3 +123,12 @@ char	*get_next_line(int fd)
 	free_line(&llist);
 	return (next_line);
 }
+
+/*
+	printf("\tlist before:\n");
+	print_list(llist);
+	printf("\tlist mid:\n");
+	print_list(llist);
+	printf("\tlist after:\n");
+	print_list(llist);
+*/

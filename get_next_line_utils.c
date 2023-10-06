@@ -6,7 +6,7 @@
 /*   By: jkoupy <jkoupy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 11:41:36 by jkoupy            #+#    #+#             */
-/*   Updated: 2023/10/06 14:01:40 by jkoupy           ###   ########.fr       */
+/*   Updated: 2023/10/06 14:32:34 by jkoupy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,28 +88,44 @@ t_list	*ft_lstnew(void *content)
 	list->next = NULL;
 	return (list);
 }
+/*
+#include <stdio.h>
 
-/* void	pl(t_list *ll)
+void	print_nl(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+	{
+		printf("(null)");
+		return ;
+	}
+	printf("\"");
+	while (str[i])
+	{
+		if (str[i] == '\n')
+			printf("\\n");
+		else
+			printf("%c", str[i]);
+		i++;
+	}
+	printf("\"");
+}
+
+void	print_list(t_list *ll)
 {
 	int cnt;
-	int	i;
 
 	cnt = 0;
 	if (!ll)
-		printf("empty list\n");
+		printf("\tempty list\n");
 	while (ll)
 	{
-		printf("Node %d: \"", cnt++);
-		i = 0;
-		while (ll->content[i])
-		{
-			if (ll->content[i] == '\n')
-				printf("\\n");
-			else
-				printf("%c", ll->content[i]);
-			i++;
-		}
-		printf("\"\n");
+		printf("\tNode %d: ", cnt++);
+		print_nl(ll->content);
+		printf("\n");
 		ll = ll->next;
 	}
-} */
+}
+*/
